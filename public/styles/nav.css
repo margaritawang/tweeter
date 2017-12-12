@@ -1,18 +1,18 @@
-/*html {
+html {
   box-sizing: border-box;
 }
 *, *:before, *:after {
   box-sizing: inherit;
-}*/
+}
 
 /*
  * Global layout stuff
  */
 
 #nav-bar {
-  top:0;
-  left:0;
-  right:0;
+  top: 0;
+  left: 0;
+  right: 0;
   margin: 0;
   color: #e8fdff;
   background-color: #00a087;
@@ -21,16 +21,16 @@
   padding-right: 2em;
   font-size: 2em;
   height: 80px;
-  line-height: 10px;
   position: fixed;
 }
 
-.logo {
+#nav-bar .logo {
   width: 80px;
   height: 80px;
 }
 
-.header {
+#nav-bar .header {
   padding-left: 10px;
+  position: absolute;
   vertical-align: middle;
 }
