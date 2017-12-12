@@ -30,6 +30,7 @@ html {
 }
 
 #nav-bar .header {
+  line-height: 2.5;
   padding-left: 10px;
   position: absolute;
   vertical-align: middle;
