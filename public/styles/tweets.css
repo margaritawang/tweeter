@@ -10,12 +10,14 @@ html {
   margin: 30px;
   margin-top: 10px;
   border-radius: 5px;
-  border: 0.75px solid lightgrey;
+  /*border: 0.75px solid lightgrey;*/
+  text-align: left;
 }
 
 .tweet {
-  border: 2px solid lightgrey;
-  margin-bottom: 10px;
+  border: 0.75px solid lightgrey;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
 .tweet .profile {
   width: 40px;
@@ -30,8 +32,12 @@ html {
   /*border: solid grey;*/
   text-align: left;
   padding: 10px;
+  opacity: 0.5;
 }
 
+.tweet p {
+  padding: 20px;
+}
 
 .tweet .header p {
   margin: 0;
@@ -42,22 +48,25 @@ html {
 
 .tweet h2 {
   margin: 0;
+  padding-left: 10px;
   display: inline-block;
+  vertical-align: top;
 }
 
-.tweet article {
+/*.tweet article {
   padding: 30px;
-}
+}*/
 .tweet .footer {
   font-size: 0.5em;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-top: 1px solid lightgrey;
+/*  padding-top: 10px;
+  padding-bottom: 10px;*/
+  border-top: 0.25px solid lightgrey;
   text-align: left;
 }
 
-.tweet {
-  border: 2px solid #fff;
+.tweet .footer p {
+  padding: 10px;
+  margin: 0;
 }
 
 .icon {
@@ -74,9 +83,5 @@ html {
 }
 
 .tweet:hover .header{
-  opacity: 1;
-}
-
-.tweet .header{
-  opacity: 0.5;
+  opacity: 1.5;
 }

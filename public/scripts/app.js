@@ -29,8 +29,8 @@ function createTweetElement (tweetData) {
   $header.append($img,$name,$handle);
   var $content = $('<p>').text(tweetData.content.text);
   var $icon1 = $('<img>').addClass('icon').attr('src', 'https://image.flaticon.com/icons/svg/60/60993.svg');
-  var $icon2 = $('<img>').addClass('icon').attr('src', 'https://image.flaticon.com/icons/svg/60/60993.svg');
-  var $icon3 = $('<img>').addClass('icon').attr('src', 'https://image.flaticon.com/icons/svg/60/60993.svg');
+  var $icon2 = $('<img>').addClass('icon').attr('src', 'https://image.freepik.com/free-icon/retweet-arrows-symbol_318-41844.jpg');
+  var $icon3 = $('<img>').addClass('icon').attr('src', 'https://cdn1.iconfinder.com/data/icons/mini-solid-icons-vol-2/16/94-512.png');
   var $time = $('<p>').text(tweetData.created_at);
   var $footer = $('<div>').addClass('footer');
   $footer.append($time,$icon1,$icon2,$icon3);
@@ -91,7 +91,7 @@ function renderTweets(tweets) {
   for (var i in tweets) {
 
     var $tweet = createTweetElement(tweets[i]);
-    console.log($tweet);
+    // console.log($tweet);
     $('.all-tweets').append(createTweetElement(tweets[i]));
   }
     // calls createTweetElement for each tweet
