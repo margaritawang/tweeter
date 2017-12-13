@@ -26,7 +26,7 @@ $(document).ready(function () {
   function renderTweets(tweets) {
     // loops through tweets
     $('.all-tweets').empty();
-    for (var i in tweets) {
+    for (var i in tweets.reverse()) {
       // calls createTweetElement for each tweet
       var $tweet = createTweetElement(tweets[i]);
       // takes return value and appends it to the tweets container
@@ -34,20 +34,19 @@ $(document).ready(function () {
     }
   }
 
-  renderTweets(data);
+  function loadTweets(dataBase) {
+    $.ajax({
+      url: '/tweets',
+      method: 'GET',
+    }).done(renderTweets);
+  }
 
-  $('input').on('click', function(event) {
+  $('form').on('submit', function(event) {
     event.preventDefault();
     console.log($('form').serialize());
+    loadTweets('../server/data-files/initial-tweets.json');
   });
 
-  function loadTweets() {
-    $.ajax({
-      method: 'GET',
-      url: '/tweets',
-      success: renderTweets(data)
-    })
-  }
 })
 
 
