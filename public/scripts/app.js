@@ -13,12 +13,14 @@ $(document).ready(function () {
     var $header = $('<div>').addClass('header');
     $header.append($img,$name,$handle);
     var $content = $('<p>').text(tweetData.content.text);
+    var $icons = $('<div>')
     var $icon1 = $('<img>').addClass('icon').attr('src', 'https://image.flaticon.com/icons/svg/60/60993.svg');
     var $icon2 = $('<img>').addClass('icon').attr('src', 'https://image.freepik.com/free-icon/retweet-arrows-symbol_318-41844.jpg');
     var $icon3 = $('<img>').addClass('icon').attr('src', 'https://cdn1.iconfinder.com/data/icons/mini-solid-icons-vol-2/16/94-512.png');
     var $time = $('<p>').text(tweetData.created_at);
     var $footer = $('<div>').addClass('footer');
-    $footer.append($time,$icon1,$icon2,$icon3);
+    $icons.append($icon1,$icon2,$icon3);
+    $footer.append($time,$icons);
     $tweeting.append($header,$content,$footer);
     return $tweeting;
   }
@@ -26,77 +28,50 @@ $(document).ready(function () {
   function renderTweets(tweets) {
     // loops through tweets
     $('.all-tweets').empty();
-    for (var i in tweets.reverse()) {
+    for (var i in tweets) {
       // calls createTweetElement for each tweet
       var $tweet = createTweetElement(tweets[i]);
       // takes return value and appends it to the tweets container
-      $('.all-tweets').append(createTweetElement(tweets[i]));
+      $('.all-tweets').prepend($tweet);
     }
   }
 
-  function loadTweets(dataBase) {
+  function postTweets(tweet) {
+    $.ajax({
+      url: '/tweets',
+      method: "POST",
+      data: tweet
+    }).done(function() {
+      loadTweets();
+      $('textarea').empty();
+    });
+  }
+
+  function loadTweets() {
     $.ajax({
       url: '/tweets',
       method: 'GET',
     }).done(renderTweets);
   }
 
+
   $('form').on('submit', function(event) {
     event.preventDefault();
-    console.log($('form').serialize());
-    loadTweets('../server/data-files/initial-tweets.json');
+    console.log("am i running")
+    if ($('textarea').val().length > 140) {
+      alert('Your word count is greater than 140!');
+    } else if ($('textarea').val().length === 0) {
+      alert('please fill in the form');
+    } else {
+      postTweets($(this).serialize());
+    }
+
   });
 
+  loadTweets();
+
+
+
+
 })
-
-
-
-var data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": {
-        "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-        "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-        "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-      },
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": {
-        "small":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
-        "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
-        "large":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
-      },
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  },
-  {
-    "user": {
-      "name": "Johann von Goethe",
-      "avatars": {
-        "small":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
-        "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
-        "large":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
-      },
-      "handle": "@johann49"
-    },
-    "content": {
-      "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
-    },
-    "created_at": 1461113796368
-  }
-];
-
-
 

@@ -60,6 +60,9 @@ html {
   font-size: 0.5em;
 /*  padding-top: 10px;
   padding-bottom: 10px;*/
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-top: 0.25px solid lightgrey;
   text-align: left;
 }
@@ -77,8 +80,8 @@ html {
 
 .tweet:hover .icon {
   display: inline-block;
-  float: right;
-  clear: left;
+  /*float: right;*/
+  /*clear: left;*/
   width: 20px;
   height: 20px;
 }
