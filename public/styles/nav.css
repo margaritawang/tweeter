@@ -36,3 +36,12 @@ html {
   position: absolute;
   vertical-align: middle;
 }
+
+#nav-bar button {
+  color: #00a087;
+  float: right;
+  background-color: azure;
+  padding: 10px;
+  border: 0.5px solid black;
+  border-radius: 5px;
+}

@@ -70,6 +70,10 @@ $(document).ready(function () {
 
   loadTweets();
 
+  $('button').on('click', function() {
+    $('.new-tweet').slideToggle();
+    $('textarea').focus();
+  })
 
 
 
