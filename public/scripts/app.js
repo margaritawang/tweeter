@@ -3,40 +3,53 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
+$(document).ready(function () {
 
-var u = {
-  "user": {
-    "name": "Newton",
-    "avatars": {
-      "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-      "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-      "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-    },
-    "handle": "@SirIsaac"
-  },
-  "content": {
-    "text": "If I have seen further it is by standing on the shoulders of giants"
-  },
-  "created_at": 1461116232227
-}
+  function createTweetElement (tweetData) {
+    var $tweeting = $('<article>').addClass('tweet');
+    var $img = $('<img>').addClass('profile').attr('src',tweetData.user.avatars.small);
+    var $name = $('<h2>').text(tweetData.user.name);
+    var $handle = $('<p>').text(tweetData.user.handle);
+    var $header = $('<div>').addClass('header');
+    $header.append($img,$name,$handle);
+    var $content = $('<p>').text(tweetData.content.text);
+    var $icon1 = $('<img>').addClass('icon').attr('src', 'https://image.flaticon.com/icons/svg/60/60993.svg');
+    var $icon2 = $('<img>').addClass('icon').attr('src', 'https://image.freepik.com/free-icon/retweet-arrows-symbol_318-41844.jpg');
+    var $icon3 = $('<img>').addClass('icon').attr('src', 'https://cdn1.iconfinder.com/data/icons/mini-solid-icons-vol-2/16/94-512.png');
+    var $time = $('<p>').text(tweetData.created_at);
+    var $footer = $('<div>').addClass('footer');
+    $footer.append($time,$icon1,$icon2,$icon3);
+    $tweeting.append($header,$content,$footer);
+    return $tweeting;
+  }
 
-function createTweetElement (tweetData) {
-  var $tweeting = $('<article>').addClass('tweet');
-  var $img = $('<img>').addClass('profile').attr('src',tweetData.user.avatars.small);
-  var $name = $('<h2>').text(tweetData.user.name);
-  var $handle = $('<p>').text(tweetData.user.handle);
-  var $header = $('<div>').addClass('header');
-  $header.append($img,$name,$handle);
-  var $content = $('<p>').text(tweetData.content.text);
-  var $icon1 = $('<img>').addClass('icon').attr('src', 'https://image.flaticon.com/icons/svg/60/60993.svg');
-  var $icon2 = $('<img>').addClass('icon').attr('src', 'https://image.freepik.com/free-icon/retweet-arrows-symbol_318-41844.jpg');
-  var $icon3 = $('<img>').addClass('icon').attr('src', 'https://cdn1.iconfinder.com/data/icons/mini-solid-icons-vol-2/16/94-512.png');
-  var $time = $('<p>').text(tweetData.created_at);
-  var $footer = $('<div>').addClass('footer');
-  $footer.append($time,$icon1,$icon2,$icon3);
-  $tweeting.append($header,$content,$footer);
-  return $tweeting;
-}
+  function renderTweets(tweets) {
+    // loops through tweets
+    $('.all-tweets').empty();
+    for (var i in tweets) {
+      // calls createTweetElement for each tweet
+      var $tweet = createTweetElement(tweets[i]);
+      // takes return value and appends it to the tweets container
+      $('.all-tweets').append(createTweetElement(tweets[i]));
+    }
+  }
+
+  renderTweets(data);
+
+  $('input').on('click', function(event) {
+    event.preventDefault();
+    console.log($('form').serialize());
+  });
+
+  function loadTweets() {
+    $.ajax({
+      method: 'GET',
+      url: '/tweets',
+      success: renderTweets(data)
+    })
+  }
+})
+
 
 
 var data = [
@@ -86,17 +99,5 @@ var data = [
   }
 ];
 
-function renderTweets(tweets) {
-  // loops through tweets
-  for (var i in tweets) {
 
-    var $tweet = createTweetElement(tweets[i]);
-    // console.log($tweet);
-    $('.all-tweets').append(createTweetElement(tweets[i]));
-  }
-    // calls createTweetElement for each tweet
-    // takes return value and appends it to the tweets container
-}
-
-renderTweets(data);
 

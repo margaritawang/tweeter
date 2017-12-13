@@ -10,8 +10,8 @@ html {
   margin: 30px;
   margin-top: 10px;
   border-radius: 5px;
-  /*border: 0.75px solid lightgrey;*/
   text-align: left;
+  padding: 10px;
 }
 
 .tweet {
@@ -78,6 +78,7 @@ html {
 .tweet:hover .icon {
   display: inline-block;
   float: right;
+  clear: left;
   width: 20px;
   height: 20px;
 }
