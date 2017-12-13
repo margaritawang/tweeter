@@ -17,13 +17,8 @@ html {
   text-align: left;
   padding-left: 10px;
   padding-top: 10px;
+  border-bottom: 1px solid black;
 }
-/*
-.new-tweet h2:after {
-    content:'';
-    display:block;
-    border:1px solid black;
-}*/
 
 
 .new-tweet form {

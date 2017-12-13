@@ -1,0 +1,82 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.all-tweets {
+  background-color: white;
+  margin: 30px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 0.75px solid lightgrey;
+}
+
+.tweet {
+  border: 2px solid lightgrey;
+  margin-bottom: 10px;
+}
+.tweet .profile {
+  width: 40px;
+  height: 40px;
+}
+
+.tweet .header {
+  background-color: #f2f2f2;
+  margin: 0;
+  margin-top: 0;
+  border-radius: 5px;
+  /*border: solid grey;*/
+  text-align: left;
+  padding: 10px;
+}
+
+
+.tweet .header p {
+  margin: 0;
+  display: inline-block;
+  float: right;
+  vertical-align: center;
+}
+
+.tweet h2 {
+  margin: 0;
+  display: inline-block;
+}
+
+.tweet article {
+  padding: 30px;
+}
+.tweet .footer {
+  font-size: 0.5em;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 1px solid lightgrey;
+  text-align: left;
+}
+
+.tweet {
+  border: 2px solid #fff;
+}
+
+.icon {
+  display: none;
+  width: 20px;
+  height: 20px;
+}
+
+.tweet:hover .icon {
+  display: inline-block;
+  float: right;
+  width: 20px;
+  height: 20px;
+}
+
+.tweet:hover .header{
+  opacity: 1;
+}
+
+.tweet .header{
+  opacity: 0.5;
+}
