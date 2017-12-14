@@ -43,7 +43,7 @@ $(document).ready(function () {
       data: tweet
     }).done(function() {
       loadTweets();
-      $('textarea').empty();
+      $('form')[0].reset();
     });
   }
 
@@ -57,13 +57,14 @@ $(document).ready(function () {
 
   $('form').on('submit', function(event) {
     event.preventDefault();
-    console.log("am i running")
+    // console.log("am i running")
     if ($('textarea').val().length > 140) {
       alert('Your word count is greater than 140!');
     } else if ($('textarea').val().length === 0) {
       alert('please fill in the form');
     } else {
       postTweets($(this).serialize());
+      // $('form').reset();
     }
 
   });
