@@ -1,4 +1,4 @@
-"use strict";
+  "use strict";
 
 // Simulates the kind of delay we see with network or filesystem operations
 const simulateDelay = require("./util/simulate-delay");
@@ -29,7 +29,7 @@ module.exports = function makeDataHelpers(db) {
           console.error(`Failed to connect: ${MONGODB_URI}`);
           throw err;
         }
-        // console.log("good");
+
         database.collection("tweets").find().toArray((err, results) => {
           // console.log("get it ");
           // console.log(results);
