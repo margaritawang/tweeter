@@ -64,7 +64,7 @@ $(document).ready(function () {
       alert('please fill in the form');
     } else {
       postTweets($(this).serialize());
-      // $('form').reset();
+      $('.counter').text('140');
     }
 
   });
