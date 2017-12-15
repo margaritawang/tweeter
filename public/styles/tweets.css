@@ -75,6 +75,7 @@ html {
 
 .tweet:hover .icon {
   display: inline-block;
+  color: #00a087;
   /*float: right;*/
   /*clear: left;*/
   width: 20px;
@@ -83,7 +84,6 @@ html {
 
 .tweet:hover .icon p {
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: 2em;
 }
 .tweet:hover .header{
   opacity: 1.5;
