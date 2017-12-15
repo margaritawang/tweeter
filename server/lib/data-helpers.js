@@ -28,8 +28,6 @@ module.exports = function makeDataHelpers(db) {
           console.error(`Failed to connect: ${MONGODB_URI}`);
           throw err;
         }
-        let myquery = { _id: 'objectId("' + ID_HERE +'")' };
-        let values =
         database.collection('tweets').updateOne(
         { _id: ObjectId(ID_HERE) },
 
