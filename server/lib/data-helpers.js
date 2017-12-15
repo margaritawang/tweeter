@@ -1,5 +1,7 @@
   "use strict";
 
+  const { ObjectId } = require('mongodb');
+
 // Simulates the kind of delay we see with network or filesystem operations
 const simulateDelay = require("./util/simulate-delay");
 const MONGODB_URI = "mongodb://localhost:27017/tweeter";
@@ -10,32 +12,53 @@ module.exports = function makeDataHelpers(db) {
 
     // Saves a tweet to `db`
     saveTweet: function(newTweet, callback) {
-        db.connect(MONGODB_URI, (err,database) => {
+      db.connect(MONGODB_URI, (err,database) => {
         if (err) {
           console.error(`Failed to connect: ${MONGODB_URI}`);
           throw err;
         }
-        // console.log("good");
         database.collection("tweets").insertOne(newTweet);
-        // console.log(database);
         callback(null, true);
       });
     },
 
+    likeTweet: function(ID_HERE, callback) {
+      db.connect(MONGODB_URI, (err, database) =>{
+        if (err) {
+          console.error(`Failed to connect: ${MONGODB_URI}`);
+          throw err;
+        }
+        let myquery = { _id: 'objectId("' + ID_HERE +'")' };
+        let values =
+        database.collection('tweets').updateOne(
+        { _id: ObjectId(ID_HERE) },
+
+        {
+          $inc: {'content.likes': 1}
+        },
+
+        () => {
+          database.collection("tweets").find().toArray((err, results) => {
+            callback(null, results);
+            // console.log('objectId("' + ID_HERE +'")');
+            database.close();
+          });
+        })
+
+      })
+    },
+
     getTweets: function(callback) {
       db.connect(MONGODB_URI, (err,database) => {
-        // console.log("open db");
         if (err) {
           console.error(`Failed to connect: ${MONGODB_URI}`);
           throw err;
         }
 
         database.collection("tweets").find().toArray((err, results) => {
-          // console.log("get it ");
-          // console.log(results);
+
           callback(null, results);
           database.close();
-          // console.log("close db");
         });
       });
     }

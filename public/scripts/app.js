@@ -14,12 +14,14 @@ $(document).ready(function () {
     $header.append($img,$name,$handle);
     var $content = $('<p>').text(tweetData.content.text);
     var $icons = $('<div>')
-    var $icon1 = $('<img>').addClass('icon').attr('src', 'https://image.flaticon.com/icons/svg/60/60993.svg');
+    var $icon1 = $('<img>').addClass('heart icon').attr('src', 'https://image.flaticon.com/icons/svg/60/60993.svg');
+    $icon1.data("id",tweetData._id);
+    var $likes = $('<p>').addClass('icon').text(tweetData.content.likes);
     var $icon2 = $('<img>').addClass('icon').attr('src', 'https://image.freepik.com/free-icon/retweet-arrows-symbol_318-41844.jpg');
     var $icon3 = $('<img>').addClass('icon').attr('src', 'https://cdn1.iconfinder.com/data/icons/mini-solid-icons-vol-2/16/94-512.png');
     var $time = $('<p>').text(tweetData.created_at);
     var $footer = $('<div>').addClass('footer');
-    $icons.append($icon1,$icon2,$icon3);
+    $icons.append($icon1,$likes,$icon2,$icon3);
     $footer.append($time,$icons);
     $tweeting.append($header,$content,$footer);
     return $tweeting;
@@ -34,6 +36,10 @@ $(document).ready(function () {
       // takes return value and appends it to the tweets container
       $('.all-tweets').prepend($tweet);
     }
+    $('.heart').on('click', function(event) {
+      event.preventDefault();
+      likeTweet($(this).data());
+    })
   }
 
   function postTweets(tweet) {
@@ -50,8 +56,16 @@ $(document).ready(function () {
   function loadTweets() {
     $.ajax({
       url: '/tweets',
-      method: 'GET',
+      method: 'GET'
     }).done(renderTweets);
+  }
+
+  function likeTweet(tweetId) {
+    $.ajax({
+      url:'/tweets/like',
+      method: 'POST',
+      data: tweetId
+    }).done(loadTweets);
   }
 
 
@@ -75,6 +89,13 @@ $(document).ready(function () {
     $('.new-tweet').slideToggle();
     $('textarea').focus();
   })
+
+  // $('.heart').on('click', function(event) {
+  //   console.log("clicked");
+  //   event.preventDefault();
+  //   likeTweet($(this).data().id);
+  // })
+
 
 
 
