@@ -35,6 +35,7 @@ module.exports = function(DataHelpers) {
       return;
     }
 
+    // Stores post in database
     const user = req.body.user ? req.body.user : userHelper.generateRandomUser();
     const tweet = {
       user: user,

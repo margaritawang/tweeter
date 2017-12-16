@@ -11,20 +11,27 @@ $(document).ready(function () {
     var $name = $('<h2>').text(tweetData.user.name);
     var $handle = $('<p>').text(tweetData.user.handle);
     var $header = $('<div>').addClass('header');
+
     $header.append($img,$name,$handle);
+
     var $content = $('<p>').text(tweetData.content.text);
     var $icons = $('<div>')
     var $icon1 = $('<i>').addClass('icon fa fa-flag fa-2x');
     var $likes = $('<p>').addClass('icon fa').text(tweetData.likes);
     var $icon2 = $('<i>').addClass('icon fa fa-retweet fa-2x');
     var $icon3 = $('<i>').addClass('icon fa fa-heart fa-2x');
+
+    //stores tweet id and like state as data attributes in the heart icon
     $icon3.data("id",tweetData._id);
     $icon3.data("state", tweetData.state);
+
     var $time = $('<p>').text(tweetData.created_at);
     var $footer = $('<div>').addClass('footer');
+
     $icons.append($icon1,$icon2,$icon3,$likes);
     $footer.append($time,$icons);
     $tweeting.append($header,$content,$footer);
+
     return $tweeting;
   }
 
@@ -69,7 +76,7 @@ $(document).ready(function () {
     }).done(loadTweets);
   }
 
-
+  // Sends error message when a post is invalid
   $('form').on('submit', function(event) {
     event.preventDefault();
     if ($('textarea').val().length > 140) {
