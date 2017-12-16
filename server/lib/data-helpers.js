@@ -28,21 +28,39 @@ module.exports = function makeDataHelpers(db) {
           console.error(`Failed to connect: ${MONGODB_URI}`);
           throw err;
         }
-        database.collection('tweets').updateOne(
-        { _id: ObjectId(ID_HERE) },
+        console.log(ID_HERE);
+        if (ID_HERE.state === 'false') {
+          database.collection('tweets').updateOne(
+          { _id: ObjectId(ID_HERE.id) },
 
-        {
-          $inc: {'content.likes': 1}
-        },
+          {
+            $inc: {likes: 1},
+            $set: {state: 'true'}
+          },
 
-        () => {
-          database.collection("tweets").find().toArray((err, results) => {
-            callback(null, results);
-            // console.log('objectId("' + ID_HERE +'")');
-            database.close();
-          });
-        })
+          () => {
+            database.collection("tweets").find().toArray((err, results) => {
+              callback(null, results);
+              database.close();
+            });
+          })
+        } else {
+          database.collection('tweets').updateOne(
+            { _id: ObjectId(ID_HERE.id) },
 
+            {
+              $inc: {likes: -1},
+              $set: {state: 'false'}
+            },
+
+            () => {
+              database.collection("tweets").find().toArray((err, results) => {
+                callback(null, results);
+                database.close();
+              });
+          })
+        }
+        // console.log(ID_HERE);
       })
     },
 

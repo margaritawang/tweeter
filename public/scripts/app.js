@@ -15,10 +15,11 @@ $(document).ready(function () {
     var $content = $('<p>').text(tweetData.content.text);
     var $icons = $('<div>')
     var $icon1 = $('<i>').addClass('icon fa fa-flag fa-2x');
-    var $likes = $('<p>').addClass('icon fa').text(tweetData.content.likes);
+    var $likes = $('<p>').addClass('icon fa').text(tweetData.likes);
     var $icon2 = $('<i>').addClass('icon fa fa-retweet fa-2x');
     var $icon3 = $('<i>').addClass('icon fa fa-heart fa-2x');
     $icon3.data("id",tweetData._id);
+    $icon3.data("state", tweetData.state);
     var $time = $('<p>').text(tweetData.created_at);
     var $footer = $('<div>').addClass('footer');
     $icons.append($icon1,$icon2,$icon3,$likes);
@@ -60,11 +61,11 @@ $(document).ready(function () {
     }).done(renderTweets);
   }
 
-  function likeTweet(tweetId) {
+  function likeTweet(tweetInfo) {
     $.ajax({
       url:'/tweets/like',
       method: 'POST',
-      data: tweetId
+      data: tweetInfo
     }).done(loadTweets);
   }
 

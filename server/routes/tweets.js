@@ -18,15 +18,15 @@ module.exports = function(DataHelpers) {
   });
 
   tweetsRoutes.post("/like", function(req, res) {
-    const tweetId = req.body.id;
-    DataHelpers.likeTweet(tweetId, (err)=>{
+    const tweetInfo = req.body;
+    DataHelpers.likeTweet(tweetInfo, (err)=>{
       if (err) {
         res.status(500).json({ error: err.message });
       } else {
         res.send();
       }
     })
-    // console.log(tweetId);
+
   })
 
   tweetsRoutes.post("/", function(req, res) {
@@ -40,9 +40,10 @@ module.exports = function(DataHelpers) {
       user: user,
       content: {
         text: req.body.text,
-        likes: 0
       },
-      created_at: Date.now()
+      created_at: Date.now(),
+      likes: 0,
+      state: 'false'
     };
 
     DataHelpers.saveTweet(tweet, (err) => {
