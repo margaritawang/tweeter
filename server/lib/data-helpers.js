@@ -22,13 +22,14 @@ module.exports = function makeDataHelpers(db) {
       });
     },
 
+    // Likes a tweet and if tweet is alredy liked clicking it should do the reverse
     likeTweet: function(ID_HERE, callback) {
       db.connect(MONGODB_URI, (err, database) =>{
         if (err) {
           console.error(`Failed to connect: ${MONGODB_URI}`);
           throw err;
         }
-        console.log(ID_HERE);
+
         if (ID_HERE.state === 'false') {
           database.collection('tweets').updateOne(
           { _id: ObjectId(ID_HERE.id) },
@@ -60,10 +61,10 @@ module.exports = function makeDataHelpers(db) {
               });
           })
         }
-        // console.log(ID_HERE);
       })
     },
 
+    // Load existing tweets
     getTweets: function(callback) {
       db.connect(MONGODB_URI, (err,database) => {
         if (err) {

@@ -72,7 +72,6 @@ $(document).ready(function () {
 
   $('form').on('submit', function(event) {
     event.preventDefault();
-    // console.log("am i running")
     if ($('textarea').val().length > 140) {
       alert('Your word count is greater than 140!');
     } else if ($('textarea').val().length === 0) {
@@ -90,15 +89,5 @@ $(document).ready(function () {
     $('.new-tweet').slideToggle();
     $('textarea').focus();
   })
-
-  // $('.heart').on('click', function(event) {
-  //   console.log("clicked");
-  //   event.preventDefault();
-  //   likeTweet($(this).data().id);
-  // })
-
-
-
-
 })
 
